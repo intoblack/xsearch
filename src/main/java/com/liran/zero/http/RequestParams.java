@@ -36,6 +36,14 @@ public class RequestParams {
 		return new HashMap<String, String>(this.headers);
 	}
 
+	public RequestParams putHead(String paramName, String value) {
+		if (StringUtil.isEmpty(paramName) || value == null) {
+			throw new IllegalArgumentException("参数名 或者 参数值 为空");
+		}
+		this.headers.put(paramName, value);
+		return this;
+	}
+
 	public RequestParams setHeaders(Map<String, String> headers) {
 		if (headers != null) {
 			this.headers.putAll(headers);
@@ -49,6 +57,14 @@ public class RequestParams {
 
 	public RequestParams setCharset(String charset) {
 		Charset = charset;
+		return this;
+	}
+
+	public RequestParams setCookie(String cookie) {
+		if (StringUtil.isEmpty(cookie)) {
+			throw new IllegalArgumentException("Cookie 不能为空");
+		}
+		this.putHead(REQUEST_TYPE.COOKIE.getValue(), cookie);
 		return this;
 	}
 
