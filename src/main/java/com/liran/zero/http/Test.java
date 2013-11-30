@@ -1,6 +1,7 @@
 package com.liran.zero.http;
 
 import java.io.IOException;
+import java.util.Random;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -17,5 +18,6 @@ public class Test {
 		System.out.println((resEntity == null) ? null : EntityUtils
 				.toString(resEntity));
 		resEntity.consumeContent();
+		System.out.println(new Random().nextLong());
 	}
 }
