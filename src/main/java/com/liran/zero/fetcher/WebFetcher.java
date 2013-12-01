@@ -84,7 +84,7 @@ public class WebFetcher {
 	public static void main(String[] args) throws ZeroFetcherException {
 		WebFetcher fetcher = new WebFetcher();
 		System.out.println(fetcher.getHtml(new RequestParams(
-				"http://s.weibo.com/weibo/%25E4%25BA%2591%25E8%25AE%25A1%25E7%25AE%2597&xsort=time&Refer=index_subs")));
+				"http://s.weibo.com/weibo/%25E5%25BC%2580%25E5%25BF%2583&Refer=index")));
 	}
 
 	public void setProxy(HttpHost proxy) {
