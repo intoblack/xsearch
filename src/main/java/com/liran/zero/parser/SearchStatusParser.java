@@ -12,7 +12,7 @@ import org.jsoup.select.Elements;
 
 import net.sf.json.JSONObject;
 
-import com.liran.zero.fetcher.ZeroFetcherException;
+import com.liran.zero.exception.ZeroFetcherException;
 import com.liran.zero.util.FileUtil;
 import com.liran.zero.util.StringUtil;
 

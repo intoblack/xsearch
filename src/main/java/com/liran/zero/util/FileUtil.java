@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.liran.zero.fetcher.ZeroFetcherException;
+import com.liran.zero.exception.ZeroFetcherException;
 
 public class FileUtil {
 

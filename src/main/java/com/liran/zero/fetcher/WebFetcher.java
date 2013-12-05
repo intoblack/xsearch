@@ -13,6 +13,7 @@ import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import com.liran.zero.exception.ZeroFetcherException;
 import com.liran.zero.http.RequestParams;
 import com.liran.zero.http.ZeroHttpClient;
 import com.liran.zero.util.StringUtil;
@@ -22,7 +23,7 @@ public class WebFetcher {
 	private static final Pattern p_charset = Pattern
 			.compile("charset\\s?=\\s?([a-zA-Z0-9\\-]+)");
 	private static final Pattern p_encoding = Pattern
-			.compile("encoding=\"([a-zA-Z0-9\\-]+)\"");
+			.compile("encoding\\s?=\\s?\"([a-zA-Z0-9\\-]+)\"");
 
 	public String getHtml(RequestParams requestParams)
 			throws ZeroFetcherException {
@@ -81,11 +82,7 @@ public class WebFetcher {
 		return charset;
 	}
 
-	public static void main(String[] args) throws ZeroFetcherException {
-		WebFetcher fetcher = new WebFetcher();
-		System.out.println(fetcher.getHtml(new RequestParams(
-				"http://s.weibo.com/weibo/%25E5%25BC%2580%25E5%25BF%2583&Refer=index")));
-	}
+
 
 	public void setProxy(HttpHost proxy) {
 		httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,
