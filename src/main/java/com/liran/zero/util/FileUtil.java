@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.liran.zero.fetcher.ZeroFetcherException;
+import com.liran.zero.xsearch.exception.ZeroException;
 
 public class FileUtil {
 
@@ -126,7 +126,7 @@ public class FileUtil {
 	 * @throws ZooPoolException
 	 */
 	public static List<String> readFileData(File file)
-			throws ZeroFetcherException {
+			throws ZeroException {
 		List<String> fileDataList = new ArrayList<String>();
 		BufferedReader fileReader = null;
 		try {
@@ -137,13 +137,13 @@ public class FileUtil {
 				fileDataList.add(data);
 			}
 		} catch (Exception e) {
-			throw new ZeroFetcherException("FILE_READ_FAILED", e);
+			throw new ZeroException("FILE_READ_FAILED", e);
 		} finally {
 			if (fileReader != null) {
 				try {
 					fileReader.close();
 				} catch (IOException e) {
-					throw new ZeroFetcherException("FILE_CLOSE_FAILED", e);
+					throw new ZeroException("FILE_CLOSE_FAILED", e);
 				}
 			}
 
@@ -162,7 +162,7 @@ public class FileUtil {
 	 * @throws ZooPoolException
 	 */
 	public static List<String> readFileData(String filePath)
-			throws ZeroFetcherException {
+			throws ZeroException {
 		File file = new File(filePath);
 		return readFileData(file);
 	}
@@ -237,7 +237,7 @@ public class FileUtil {
 		writeFile(new File(fileName), contents);
 	}
 
-	public static void main(String[] args) throws ZeroFetcherException {
+	public static void main(String[] args) throws ZeroException {
 		System.out.println(StringUtil.wordListToString(
 				readFileData("/home/lixuze/search.html"), "\r\n"));
 	}

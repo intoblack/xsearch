@@ -16,16 +16,17 @@ import org.apache.http.util.EntityUtils;
 import com.liran.zero.http.RequestParams;
 import com.liran.zero.http.ZeroHttpClient;
 import com.liran.zero.util.StringUtil;
+import com.liran.zero.xsearch.exception.ZeroException;
 
 public class WebFetcher {
 	private DefaultHttpClient httpClient = ZeroHttpClient.httpClient;
 	private static final Pattern p_charset = Pattern
 			.compile("charset\\s?=\\s?([a-zA-Z0-9\\-]+)");
 	private static final Pattern p_encoding = Pattern
-			.compile("encoding=\"([a-zA-Z0-9\\-]+)\"");
+			.compile("encoding\\s?=\\s?\"([a-zA-Z0-9\\-]+)\"");
 
 	public String getHtml(RequestParams requestParams)
-			throws ZeroFetcherException {
+			throws ZeroException {
 		HttpResponse response = null;
 		String html = null;
 		try {
@@ -57,13 +58,13 @@ public class WebFetcher {
 			charset = charset == null ? "utf-8" : charset;
 			html = new String(bytes, charset);
 		} catch (Exception e) {
-			throw new ZeroFetcherException(e);
+			throw new ZeroException(e);
 		} finally {
 			if (response != null) {
 				try {
 					EntityUtils.consume(response.getEntity());
 				} catch (IOException e) {
-					throw new ZeroFetcherException(e);
+					throw new ZeroException(e);
 				}
 			}
 		}
@@ -81,11 +82,7 @@ public class WebFetcher {
 		return charset;
 	}
 
-	public static void main(String[] args) throws ZeroFetcherException {
-		WebFetcher fetcher = new WebFetcher();
-		System.out.println(fetcher.getHtml(new RequestParams(
-				"http://s.weibo.com/weibo/%25E5%25BC%2580%25E5%25BF%2583&Refer=index")));
-	}
+
 
 	public void setProxy(HttpHost proxy) {
 		httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,
