@@ -12,6 +12,7 @@ import org.jsoup.select.Elements;
 
 import net.sf.json.JSONObject;
 
+import com.liran.zero.http.ZeroResponse;
 import com.liran.zero.util.FileUtil;
 import com.liran.zero.util.StringUtil;
 import com.liran.zero.xsearch.exception.ZeroException;
@@ -82,6 +83,10 @@ public class SearchStatusParser implements IParser<String> {
 		SearchStatusParser status = new SearchStatusParser();
 		System.out.println(status.parser(StringUtil.wordListToString(
 				FileUtil.readFileData("/home/lixuze/search.html"), "\r\n")));
+	}
+
+	public boolean assertResponse(ZeroResponse response) {
+		return false;
 	}
 
 }

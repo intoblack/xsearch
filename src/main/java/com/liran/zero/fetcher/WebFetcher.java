@@ -15,6 +15,7 @@ import org.apache.http.util.EntityUtils;
 
 import com.liran.zero.http.RequestParams;
 import com.liran.zero.http.ZeroHttpClient;
+import com.liran.zero.http.ZeroResponse;
 import com.liran.zero.util.StringUtil;
 import com.liran.zero.xsearch.exception.ZeroException;
 
@@ -25,7 +26,7 @@ public class WebFetcher {
 	private static final Pattern p_encoding = Pattern
 			.compile("encoding\\s?=\\s?\"([a-zA-Z0-9\\-]+)\"");
 
-	public String getHtml(RequestParams requestParams)
+	public ZeroResponse getHtml(RequestParams requestParams)
 			throws ZeroException {
 		HttpResponse response = null;
 		String html = null;
@@ -68,7 +69,7 @@ public class WebFetcher {
 				}
 			}
 		}
-		return html;
+		return new ZeroResponse(html, requestParams.getUrl());
 
 	}
 
@@ -81,8 +82,6 @@ public class WebFetcher {
 		}
 		return charset;
 	}
-
-
 
 	public void setProxy(HttpHost proxy) {
 		httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,
